@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Чтение Excel</h1>
+
+@using (Html.BeginForm("UploadFile", "Weather", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+        <div>
+            <input type="file" name="file" />
+            <input type="submit" value="Загрузить" />
+        </div>
+}
+
+@if (ViewBag.Error != null)
+{
+        <div class="error">@ViewBag.Error</div>
+}
+
+@if (ViewBag.Data != null)
+{
+        <table>
+        @foreach (var row in ViewBag.Data)
+        {
+                    <tr>
+                @foreach (var cell in row)
+                {
+                                <td>@cell</td>
+                }
+                    </tr>
+        }
+        </table>
+}
