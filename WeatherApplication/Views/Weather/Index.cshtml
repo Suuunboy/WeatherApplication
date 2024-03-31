@@ -3,33 +3,24 @@
 *@
 @{
 }
+@model WeatherApplication.Models.Weather
 
-<h1>Чтение Excel</h1>
+<h1>Загрузка данных из Excel</h1>
 
-@using (Html.BeginForm("UploadFile", "Weather", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-        <div>
-            <input type="file" name="file" />
-            <input type="submit" value="Загрузить" />
-        </div>
-}
+<form method="post" enctype="multipart/form-data" action="@Url.Action("UploadFile", "Weather")">
+    <div>
+        <label for="file">Выберите файл Excel:</label>
+        <input type="file" name="file" id="file" />
+        <button type="submit">Загрузить</button>
+    </div>
+</form>
 
 @if (ViewBag.Error != null)
 {
-        <div class="error">@ViewBag.Error</div>
+        <div class="alert alert-danger">@ViewBag.Error</div>
 }
 
-@if (ViewBag.Data != null)
+@if (ViewBag.Message != null)
 {
-        <table>
-        @foreach (var row in ViewBag.Data)
-        {
-                    <tr>
-                @foreach (var cell in row)
-                {
-                                <td>@cell</td>
-                }
-                    </tr>
-        }
-        </table>
+        <div class="alert alert-success">@ViewBag.Message</div>
 }

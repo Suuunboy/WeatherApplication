@@ -5,6 +5,9 @@ namespace WeatherApplication.Models
     public class Weather
     {
         [Key]
+        public Guid Id { get; set; }
+
+        [Required]
         public string Data { get; set; }
 
         [Required]
