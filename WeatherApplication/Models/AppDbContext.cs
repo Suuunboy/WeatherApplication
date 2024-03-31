@@ -15,9 +15,9 @@ namespace WeatherApplication.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Weather>().Property(b => b.Data).IsRequired();
-            modelBuilder.Entity<Weather>().Property(b => b.Time).IsRequired();
-            modelBuilder.Entity<Weather>().Property(b => b.T).IsRequired();
+            //modelBuilder.Entity<Weather>().Property(b => b.Date).IsRequired();
+            //modelBuilder.Entity<Weather>().Property(b => b.Time).IsRequired();
+            //modelBuilder.Entity<Weather>().Property(b => b.T).IsRequired();
         }
     }
 }

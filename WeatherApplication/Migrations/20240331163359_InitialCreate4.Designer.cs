@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeatherApplication.Models;
 
@@ -11,9 +12,10 @@ using WeatherApplication.Models;
 namespace WeatherApplication.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240331163359_InitialCreate4")]
+    partial class InitialCreate4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +30,7 @@ namespace WeatherApplication.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("Cloudy")
+                    b.Property<int>("Cloudy")
                         .HasColumnType("int");
 
                     b.Property<string>("Date")
@@ -36,34 +38,36 @@ namespace WeatherApplication.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direction")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Event")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("Humidity")
+                    b.Property<double>("Humidity")
                         .HasColumnType("float");
 
-                    b.Property<int?>("Pressure")
+                    b.Property<int>("Pressure")
                         .HasColumnType("int");
 
                     b.Property<int>("T")
                         .HasColumnType("int");
 
-                    b.Property<double?>("Td")
+                    b.Property<double>("Td")
                         .HasColumnType("float");
 
                     b.Property<string>("Time")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("VV")
+                    b.Property<int>("VV")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Velocity")
+                    b.Property<int>("Velocity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("h")
+                    b.Property<int>("h")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

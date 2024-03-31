@@ -7,35 +7,35 @@ namespace WeatherApplication.Models
         [Key]
         public Guid Id { get; set; }
 
-        [Required]
-        public string Data { get; set; }
+        
+        public string Date { get; set; }
 
-        [Required]
+        
         public string Time { get; set; }
 
-        [Required]
+        
         public int T { get; set; }
 
         
-        public double Humidity { get; set; }
+        public double? Humidity { get; set; }
 
         
-        public double Td { get; set; }
+        public double? Td { get; set; }
 
         
-        public int Pressure { get; set; }
+        public int? Pressure { get; set; }
 
-        public string Direction { get; set; }
+        public string? Direction { get; set; }
 
-        public int Velocity { get; set; }
+        public int? Velocity { get; set; }
 
 
-        public int Cloudy { get; set; }
+        public int? Cloudy { get; set; }
 
-        public int h { get; set; }
+        public int? h { get; set; }
 
-        public int VV { get; set; }
+        public int? VV { get; set; }
 
-        public string Event { get; set; }
+        public string? Event { get; set; }
     }
 }

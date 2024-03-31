@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System.Collections.Generic;
 using System.IO;
 using WeatherApplication.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
+
 
 namespace WeatherApplication.Controllers
 {
@@ -21,6 +27,43 @@ namespace WeatherApplication.Controllers
         {
             return View();
         }
+
+
+        public IActionResult DataByYearOrMonth(string year, string month)
+        {
+            
+            if (string.IsNullOrEmpty(year) && string.IsNullOrEmpty(month))
+            {
+                return View();
+            }
+
+            var sqlQuery = "";
+
+            if (string.IsNullOrEmpty(year))
+            {
+                sqlQuery = $"SELECT * FROM Weathers WHERE Date LIKE '%.{month}.%'";
+                
+            }
+            else if (string.IsNullOrEmpty(month))
+            {
+                sqlQuery = $"SELECT * FROM Weathers WHERE Date LIKE '%{year}'";
+                
+            }
+            else 
+            {
+                sqlQuery = $"SELECT * FROM Weathers WHERE Date LIKE '%{year}' AND Date LIKE '%.{month}.%'";
+
+            }
+
+            var weatherDataForYear = _context.Weathers.FromSqlRaw(sqlQuery);
+
+            if (weatherDataForYear is null) { return View(); }
+            else { return View(weatherDataForYear.ToList()); }
+
+
+        }
+
+
 
         [HttpPost]
         public IActionResult UploadFile(IFormFile file)
@@ -71,7 +114,7 @@ namespace WeatherApplication.Controllers
                                         switch (j)
                                         {
                                             case 0:
-                                                weather.Data = cell.ToString();
+                                                weather.Date = cell.ToString();
                                                 break;
                                             case 1:
                                                 weather.Time = cell.ToString();
@@ -127,7 +170,7 @@ namespace WeatherApplication.Controllers
 
             foreach (var weather in weatherData)
             {
-                var existingWeather = _context.Weathers.FirstOrDefault(w => w.Data == weather.Data && w.Time == weather.Time);
+                var existingWeather = _context.Weathers.FirstOrDefault(w => w.Date == weather.Date && w.Time == weather.Time);
                 if (existingWeather == null)
                 {
                     _context.Weathers.Add(weather);

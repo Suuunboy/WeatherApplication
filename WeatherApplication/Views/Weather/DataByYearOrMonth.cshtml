@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<WeatherApplication.Models.Weather>
+
+@if (Model != null && Model.Any())
+{
+        <h1>Данные погоды за указанный год и месяц</h1>
+
+            <a asp-action="DataByYearOrMonth" class="btn btn-primary">Назад</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Время</th>
+                    <th>Температура</th>
+                    <!-- Добавьте остальные поля, если необходимо -->
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>@item.Date</td>
+                            <td>@item.Time</td>
+                            <td>@item.T</td>
+                            <!-- Добавьте остальные поля, если необходимо -->
+                        </tr>
+            }
+            </tbody>
+        </table>
+
+            
+}
+else
+{
+        <h1>Введите год для поиска данных</h1>
+
+        <form method="get" action="/Weather/DataByYearOrMonth">
+            <label for="year">Введите год:</label>
+            <input type="text" id="year" name="year" value="" />
+                <label for="month">Введите месяц:</label>
+                <input type="text" id="month" name="month" value="" />
+            <button type="submit">Поиск</button>
+        </form>
+}
