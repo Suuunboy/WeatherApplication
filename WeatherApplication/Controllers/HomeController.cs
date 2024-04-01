@@ -20,7 +20,7 @@ namespace WeatherApplication.Controllers
 
         public IActionResult Index()
         {
-            var adminName = Configuration.GetSection("Admin:Name");
+            
 
             return View();
         }

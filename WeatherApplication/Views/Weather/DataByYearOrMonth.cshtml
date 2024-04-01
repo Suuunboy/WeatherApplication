@@ -1,40 +1,51 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-@model IEnumerable<WeatherApplication.Models.Weather>
+﻿@model IEnumerable<WeatherApplication.Models.Weather>
 
 @if (Model != null && Model.Any())
 {
         <h1>Данные погоды за указанный год и месяц</h1>
 
-            <a asp-action="DataByYearOrMonth" class="btn btn-primary">Назад</a>
+        <a asp-action="DataByYearOrMonth" class="btn btn-primary">Назад</a>
 
-        <table>
+        <table style="border-collapse: collapse;">
             <thead>
                 <tr>
-                    <th>Дата</th>
-                    <th>Время</th>
-                    <th>Температура</th>
-                    <!-- Добавьте остальные поля, если необходимо -->
+                    <th style="border: 1px solid black;">Дата</th>
+                    <th style="border: 1px solid black;">Время</th>
+                    <th style="border: 1px solid black;">Температура</th>
+                    <th style="border: 1px solid black;">Отн. влажность воздуха, %</th>
+                    <th style="border: 1px solid black;">Точка росы</th>
+                    <th style="border: 1px solid black;">Давление мм рт. ст.</th>
+                    <th style="border: 1px solid black;">Направление ветра</th>
+                    <th style="border: 1px solid black;">Скорость ветра, м/c</th>
+                    <th style="border: 1px solid black;">Облачность</th>
+                    <th style="border: 1px solid black;">Нижняя граница облачности</th>
+                    <th style="border: 1px solid black;">Гориз. видимость, км</th>
+                    <th style="border: 1px solid black;">Погодные явления</th>
                 </tr>
             </thead>
             <tbody>
             @foreach (var item in Model)
             {
                         <tr>
-                            <td>@item.Date</td>
-                            <td>@item.Time</td>
-                            <td>@item.T</td>
-                            <!-- Добавьте остальные поля, если необходимо -->
+                            <td style="border: 1px solid black;">@item.Date</td>
+                            <td style="border: 1px solid black;">@item.Time</td>
+                            <td style="border: 1px solid black;">@item.T</td>
+                            <td style="border: 1px solid black;">@item.Humidity</td>
+                            <td style="border: 1px solid black;">@item.Td</td>
+                            <td style="border: 1px solid black;">@item.Pressure</td>
+                            <td style="border: 1px solid black;">@item.Direction</td>
+                            <td style="border: 1px solid black;">@item.Velocity</td>
+                            <td style="border: 1px solid black;">@item.Cloudy</td>
+                            <td style="border: 1px solid black;">@item.h</td>
+                            <td style="border: 1px solid black;">@item.VV</td>
+                            <td style="border: 1px solid black;">@item.Event</td>
+                        </tr>
+                        <tr>
+                            <td colspan="12" style="border: 1px solid black;"></td>
                         </tr>
             }
             </tbody>
         </table>
-
-            
 }
 else
 {
@@ -43,8 +54,8 @@ else
         <form method="get" action="/Weather/DataByYearOrMonth">
             <label for="year">Введите год:</label>
             <input type="text" id="year" name="year" value="" />
-                <label for="month">Введите месяц:</label>
-                <input type="text" id="month" name="month" value="" />
+            <label for="month">Введите месяц:</label>
+            <input type="text" id="month" name="month" value="" />
             <button type="submit">Поиск</button>
         </form>
 }
